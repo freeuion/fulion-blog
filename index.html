@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>人生轨迹 —— 一个1982年出生的普通人的半生记录</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- 引入极速 Markdown 解析库 -->
+    <!-- 引入极速轻量 Markdown 解析引擎 -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
@@ -20,7 +20,7 @@
         </nav>
     </header>
 
-    <!-- 1. 文章列表视图 -->
+    <!-- 1. 文章列表视图（仅渲染 public 公开文章） -->
     <div id="articles-view"></div>
 
     <!-- 2. 时间线视图 -->
@@ -47,26 +47,31 @@
         <p style="color: var(--text-muted); font-size: 0.9rem;">域名 fulion.net 托管于 Cloudflare Pages</p>
     </div>
 
-    <!-- 4. 文章详情视图 -->
+    <!-- 4. 文章详情与互动视图 -->
     <div id="detail-view" class="article-detail">
         <button class="back-btn" onclick="backToList()">← 返回目录</button>
         <h1 id="art-title"></h1>
         <div id="art-subtitle" class="subtitle"></div>
+        
+        <!-- Markdown 渲染正文区 -->
         <div id="art-content" class="content"></div>
 
-        <div class="interaction-bar">
-            <span>👁 <span id="view-count">...</span> 次阅读</span>
-            <button class="like-btn" onclick="likeCurrentArticle()">❤️ 赞一个 (<span id="like-count">0</span>)</button>
-        </div>
-
-        <div class="comments-section">
-            <h3>读者留言</h3>
-            <div class="comment-form">
-                <input type="text" id="cmt-name" placeholder="您的称呼（如：老友、球友）">
-                <textarea id="cmt-body" rows="3" placeholder="留下您的所思所感..."></textarea>
-                <button onclick="submitComment()">提交留言</button>
+        <!-- 互动区 -->
+        <div id="interaction-area">
+            <div class="interaction-bar">
+                <span>👁 <span id="view-count">...</span> 次阅读</span>
+                <button class="like-btn" onclick="likeCurrentArticle()">❤️ 赞一个 (<span id="like-count">0</span>)</button>
             </div>
-            <div id="comment-list" class="comment-list"></div>
+
+            <div class="comments-section">
+                <h3>读者留言</h3>
+                <div class="comment-form">
+                    <input type="text" id="cmt-name" placeholder="您的称呼（如：老友、球友）">
+                    <textarea id="cmt-body" rows="3" placeholder="留下您的所思所感..."></textarea>
+                    <button onclick="submitComment()">提交留言</button>
+                </div>
+                <div id="comment-list" class="comment-list"></div>
+            </div>
         </div>
     </div>
 </div>
@@ -75,12 +80,13 @@
 let articlesList = [];
 let currentSlug = '';
 
+// 初始化页面：先拉取 articles.json，再渲染列表与检查 URL 锚点
 window.onload = async function() {
     try {
         const res = await fetch('articles.json');
         articlesList = await res.json();
     } catch (e) {
-        console.error('加载文章清单失败', e);
+        console.error('加载 articles.json 失败', e);
     }
     renderArticleList();
     checkUrlHash();
@@ -90,6 +96,7 @@ window.onhashchange = function() {
     checkUrlHash();
 };
 
+// 列表仅渲染 visibility === 'public' 的公开文章
 function renderArticleList() {
     const container = document.getElementById('articles-view');
     let html = '';
@@ -106,6 +113,7 @@ function renderArticleList() {
     container.innerHTML = html;
 }
 
+// 检查链接里是否有 #slug（支持直接打开文章或专属分享链接）
 function checkUrlHash() {
     const hash = window.location.hash.replace('#', '').trim();
     if (hash) {
@@ -125,6 +133,7 @@ function switchNav(tab) {
     document.getElementById('btn-' + tab).classList.add('active');
 }
 
+// 打开文章详情（核心权限判断与 Markdown 渲染）
 async function openArticle(slug) {
     currentSlug = slug;
     window.location.hash = slug;
@@ -133,7 +142,6 @@ async function openArticle(slug) {
 
     document.getElementById('art-title').innerText = art.title;
     document.getElementById('art-subtitle').innerText = art.subtitle || '';
-    document.getElementById('art-content').innerHTML = '<p style="color:var(--text-muted)">文章加载中...</p>';
 
     document.getElementById('articles-view').style.display = 'none';
     document.getElementById('timeline-view').style.display = 'none';
@@ -141,15 +149,33 @@ async function openArticle(slug) {
     document.getElementById('detail-view').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // 动态抓取外部独立的 .md 文件并用 marked 渲染
+    const contentEl = document.getElementById('art-content');
+    const interactArea = document.getElementById('interaction-area');
+
+    // 1. 私密文章判断：校验密码
+    if (art.visibility === 'private') {
+        const inputPwd = prompt("这是一篇私密记录，请输入访问密码：");
+        if (inputPwd !== art.password) {
+            contentEl.innerHTML = '<p style="color:#d9534f; text-align:center; padding:50px 0;">🔒 密码错误，无法查看正文。</p>';
+            interactArea.style.display = 'none';
+            return;
+        }
+    }
+
+    // 密码正确或公开/半公开文章，展示正文与互动区
+    interactArea.style.display = 'block';
+    contentEl.innerHTML = '<p style="color:var(--text-muted)">文章加载中...</p>';
+
+    // 2. 异步抓取对应的 Markdown 文件并用 marked 库实时渲染
     try {
         const mdRes = await fetch(art.file);
         const mdText = await mdRes.text();
-        document.getElementById('art-content').innerHTML = marked.parse(mdText);
+        contentEl.innerHTML = marked.parse(mdText);
     } catch (e) {
-        document.getElementById('art-content').innerHTML = '<p style="color:#d9534f">文章加载失败，请检查网络或文件路径。</p>';
+        contentEl.innerHTML = '<p style="color:#d9534f">正文加载失败，请检查文件路径或网络连接。</p>';
     }
 
+    // 3. 拉取并展示该文章的阅读数、点赞数和评论
     loadInteractions(slug);
 }
 
