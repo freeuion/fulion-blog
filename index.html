@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>人生轨迹 —— 一个1982年出生的普通人的半生记录</title>
+    <title>行走的注脚 —— 生于闽南，行至中年。借半生羁旅，为岁月与自己落笔成篇</title>
     <link rel="stylesheet" href="styles.css">
     <!-- 引入极速轻量 Markdown 解析引擎 -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -11,8 +11,8 @@
 <body>
 <div class="container">
     <header>
-        <h1 class="site-title">人生轨迹</h1>
-        <div class="site-desc">一个1982年出生的普通人的半生记录</div>
+        <h1 class="site-title">行走的注脚</h1>
+        <div class="site-desc">生于闽南，行至中年。借半生羁旅，为岁月与自己落笔成篇</div>
         <nav>
             <button id="btn-articles" class="active" onclick="switchNav('articles')">文集记录</button>
             <button id="btn-timeline" onclick="switchNav('timeline')">人生时间轴</button>
@@ -23,20 +23,28 @@
     <!-- 1. 文章列表视图（仅渲染 public 公开文章） -->
     <div id="articles-view"></div>
 
-    <!-- 2. 时间线视图 -->
+    <!-- 2. 精修版人生时间轴视图 -->
     <div id="timeline-view" style="display: none;">
         <div class="timeline">
             <div class="timeline-item"><div class="timeline-year">1982</div><div>出生于福建泉州南安洪濑镇。</div></div>
             <div class="timeline-item"><div class="timeline-year">1984</div><div>南洋舅公舅婆回国探亲，留下家族唯一的两张老合影。</div></div>
-            <div class="timeline-item"><div class="timeline-year">1993</div><div>妹妹离奇出走到四都找外婆；同年因长孙身份被迫陪大人喝酒错过了人生第一个生日蛋糕。</div></div>
-            <div class="timeline-item"><div class="timeline-year">1997</div><div>迷上足球、外星人罗纳尔多；初三逆袭保送新侨中学高中部。</div></div>
-            <div class="timeline-item"><div class="timeline-year">1998</div><div>老屋遇旧城改造拆迁重新租房；妹妹中考因家庭经济困难遗憾未能上高中。</div></div>
-            <div class="timeline-item"><div class="timeline-year">2000</div><div>考入北京邮电大学；深秋买房风波与父亲的生死边缘之夜。</div></div>
+            <div class="timeline-item"><div class="timeline-year">1986</div><div>父母分家自立；外公背来一口铁锅与一袋大米救急。</div></div>
+            <div class="timeline-item"><div class="timeline-year">1989</div><div>入读洪濑一小；自幼在父亲的杂粮摊帮忙看摊算账。</div></div>
+            <div class="timeline-item"><div class="timeline-year">1990</div><div>父母积攒买下40平米自建小楼，终于有了属于自己的家。</div></div>
+            <div class="timeline-item"><div class="timeline-year">1993</div><div>妹妹离奇出走到四都找外婆；同年因长孙身份被迫陪大人喝酒，错过了人生第一个生日蛋糕。</div></div>
+            <div class="timeline-item"><div class="timeline-year">1997</div><div>迷上足球与外星人罗纳尔多；初三逆袭保送新侨中学高中部。</div></div>
+            <div class="timeline-item"><div class="timeline-year">1998</div><div>老屋遇旧城改造拆迁重回租房；妹妹中考因家庭经济困难，遗憾未能上高中。</div></div>
+            <div class="timeline-item"><div class="timeline-year">2000</div><div>考入北京邮电大学北上求学；深秋买房风波与父亲的生死边缘之夜。</div></div>
             <div class="timeline-item"><div class="timeline-year">2004</div><div>北邮毕业，阴差阳错来到深圳打拼。</div></div>
-            <div class="timeline-item"><div class="timeline-year">2006-2009</div><div>博客时代的文字记录与《相亲七号》；七夕告别爱情试用期与 Jojo 走到一起。</div></div>
-            <div class="timeline-item"><div class="timeline-year">2010</div><div>8月26日与 Jojo 登记结婚。</div></div>
-            <div class="timeline-item"><div class="timeline-year">2011</div><div>辞职成为自由职业者；后移居惠州四年半，小儿子 Marvin 在惠州出生。</div></div>
-            <div class="timeline-item"><div class="timeline-year">2026</div><div>暑假一家四口四川之旅；重拾笔墨，系统整理《人生轨迹》。</div></div>
+            <div class="timeline-item"><div class="timeline-year">2005</div><div>最疼爱自己的外婆辞世；在 MSN 空间开启博客时代的文字记录。</div></div>
+            <div class="timeline-item"><div class="timeline-year">2006-2008</div><div>特区里的寻觅与相亲往事，记录下《相亲七号》。</div></div>
+            <div class="timeline-item"><div class="timeline-year">2009-2010</div><div>七夕告别爱情试用期，与 Jojo 携手；年底在深圳筑下属于两人的小家；次年八月登记完婚。</div></div>
+            <div class="timeline-item"><div class="timeline-year">2011</div><div>辞职成为独立译员，开启自由职业生涯。</div></div>
+            <div class="timeline-item"><div class="timeline-year">2012</div><div>12月大儿子 Alvin 出生，初为人父；自由职业步入正轨。</div></div>
+            <div class="timeline-item"><div class="timeline-year">2014-2015</div><div>遭遇严重的焦虑症与人生低谷；2015年初决意放缓脚步，收拾行囊暂别深圳移居惠州。</div></div>
+            <div class="timeline-item"><div class="timeline-year">2016</div><div>12月小儿子 Marvin 在惠州出生，是那段避世岁月里最温暖的天使馈赠。</div></div>
+            <div class="timeline-item"><div class="timeline-year">2019</div><div>8月底为了 Alvin 的小学教育，重返深圳重新启程。</div></div>
+            <div class="timeline-item"><div class="timeline-year">2026</div><div>暑假全家四川漫游；搭建个人独立博客，系统整理《行走的注脚》。</div></div>
         </div>
     </div>
 
@@ -53,7 +61,7 @@
         <h1 id="art-title"></h1>
         <div id="art-subtitle" class="subtitle"></div>
         
-        <!-- Markdown 渲染正文区 -->
+        <!-- 正文区域 -->
         <div id="art-content" class="content"></div>
 
         <!-- 互动区 -->
@@ -80,7 +88,6 @@
 let articlesList = [];
 let currentSlug = '';
 
-// 初始化页面：先拉取 articles.json，再渲染列表与检查 URL 锚点
 window.onload = async function() {
     try {
         const res = await fetch('articles.json');
@@ -96,7 +103,6 @@ window.onhashchange = function() {
     checkUrlHash();
 };
 
-// 列表仅渲染 visibility === 'public' 的公开文章
 function renderArticleList() {
     const container = document.getElementById('articles-view');
     let html = '';
@@ -113,7 +119,6 @@ function renderArticleList() {
     container.innerHTML = html;
 }
 
-// 检查链接里是否有 #slug（支持直接打开文章或专属分享链接）
 function checkUrlHash() {
     const hash = window.location.hash.replace('#', '').trim();
     if (hash) {
@@ -133,7 +138,6 @@ function switchNav(tab) {
     document.getElementById('btn-' + tab).classList.add('active');
 }
 
-// 打开文章详情（核心权限判断与 Markdown 渲染）
 async function openArticle(slug) {
     currentSlug = slug;
     window.location.hash = slug;
@@ -152,7 +156,6 @@ async function openArticle(slug) {
     const contentEl = document.getElementById('art-content');
     const interactArea = document.getElementById('interaction-area');
 
-    // 1. 私密文章判断：校验密码
     if (art.visibility === 'private') {
         const inputPwd = prompt("这是一篇私密记录，请输入访问密码：");
         if (inputPwd !== art.password) {
@@ -162,11 +165,9 @@ async function openArticle(slug) {
         }
     }
 
-    // 密码正确或公开/半公开文章，展示正文与互动区
     interactArea.style.display = 'block';
     contentEl.innerHTML = '<p style="color:var(--text-muted)">文章加载中...</p>';
 
-    // 2. 异步抓取对应的 Markdown 文件并用 marked 库实时渲染
     try {
         const mdRes = await fetch(art.file);
         const mdText = await mdRes.text();
@@ -175,7 +176,6 @@ async function openArticle(slug) {
         contentEl.innerHTML = '<p style="color:#d9534f">正文加载失败，请检查文件路径或网络连接。</p>';
     }
 
-    // 3. 拉取并展示该文章的阅读数、点赞数和评论
     loadInteractions(slug);
 }
 
