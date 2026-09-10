@@ -18,6 +18,24 @@
     "visibility": "public"
   },
   {
+    "slug": "ming-dynasty",
+    "title": "《明朝那些事儿》读后感",
+    "subtitle": "——书还是要“读”，听远远没有读来得有趣",
+    "meta": "读书杂感 · 2019年3月",
+    "excerpt": "读完明朝那些事儿，收获主要有两点：一是将零散的明朝历史串联了起来；二是印证并颠覆了过去对明末清初历史的一些认识。",
+    "file": "articles/ming-dynasty.md",
+    "visibility": "public"
+  },
+  {
+    "slug": "dream-of-the-red-chamber",
+    "title": "红楼梦后四十回是否出自曹公之笔？",
+    "subtitle": "——从思想境界与伏笔细节谈后四十回的硬伤",
+    "meta": "读书杂感 · 2018年11月",
+    "excerpt": "我个人观点是后四十回绝对不是曹雪芹写的，因为后四十回无论从思想境界还是写作手法都与前八十回相距甚远。宝玉完婚与贾家被抄处处存疑……",
+    "file": "articles/dream-of-the-red-chamber.md",
+    "visibility": "public"
+  },
+  {
     "slug": "worldcup-2018",
     "title": "我的世界杯情怀",
     "subtitle": "——写于 2018 俄罗斯世界杯之后",
